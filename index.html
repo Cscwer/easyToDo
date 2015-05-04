@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="easyToDo">
+<head>
+	<meta charset="UTF-8">
+	<title>easyToDo</title>
+	<link rel="stylesheet" href="/node_modules/angular-material/angular-material.min.css">
+	<link rel="stylesheet" href="/public/css/easyToDo.css">
+</head>
+<body>
+	<header>
+		<span>easyToDo</span>
+	</header>
+	<div layout="row" id="main-panel">
+  		<div flex="16" class="all-categories" ng-controller="categoriesCtrl">
+  			<md-content>
+  				<h2>所有任务</h2>
+	  			<ul>
+	  				<li>
+	  					<a class="md-button md-default-theme">百度 IFE 项目</a>
+	  				</li>
+	  				<li><a>毕业设计</a></li>
+	  				<li><a>社团活动</a></li>
+	  				<li><a>家庭生活</a></li>
+	  				<li><a>默认分类</a></li>
+	  			</ul>
+	  			<md-button class="md-raised md-primary">Primary</md-button>
+  			</md-content>
+  	 	</div>
+	  	<div flex="33" class="all-tasks">
+	  		<md-content>
+	  			flex
+	  		</md-content>	
+	  	</div>
+	  	<div flex="50" class="task-details">
+	  		flex
+	  	</div>
+	</div>
+	<footer></footer>
+	<!---->
+	<script src="/node_modules/angular/angular.min.js"></script>
+	<script src="/node_modules/angular-animate/angular-animate.min.js"></script>
+	<script src="/node_modules/angular-aria/angular-aria.min.js"></script>
+	<script src="/node_modules/angular-material/angular-material.min.js"></script>
+	<script src="/public/js/controller/app.js"></script>
+</body>
+</html>
