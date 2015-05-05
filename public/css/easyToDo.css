@@ -1,3 +1,11 @@
+/**
+ * 主样式
+ */
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(../fonts/glyphicons-halflings-regular.eot);
+  src: url(../fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'), url(../fonts/glyphicons-halflings-regular.woff) format('woff'), url(../fonts/glyphicons-halflings-regular.ttf) format('truetype'), url(../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg');
+}
 body {
   height: 100%;
   margin: 0;
@@ -8,22 +16,61 @@ body {
 }
 ul {
   list-style: none;
+  -webkit-padding-start: 0;
+}
+button,
+li {
+  width: 100%;
+  padding: 0;
 }
 header {
   background-color: #3949ab;
   font-size: 2em;
-  line-height: 3;
+  height: 3em;
+  line-height: 3em;
+}
+footer {
+  align-self: flex-end;
+}
+/** 图标字体 */
+.glyphicon {
+  font-family: 'Glyphicons Halflings';
+  font-wight: 400;
+}
+.glyphicon-folder-close:before {
+  content: "\e118";
+}
+.glyphicon-plus:before {
+  color: #fff;
+  content: "\2b";
 }
 /** 主面板 */
-#main-panel {
-  align-items: stretch;
-  min-height: 80%;
-}
 /** 所有任务分类 */
-/** 每个分类下的任务 */
+.all-categories,
 .all-tasks {
-  background-color: #5677fc;
+  position: relative;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
 }
+.all-categories {
+  width: 100%;
+}
+.all-categories > div > * {
+  display: inline-block;
+}
+.all-categories > div > .md-mini {
+  position: absolute;
+  top: 1em;
+  right: 1.1em;
+}
+a.md-button {
+  display: block;
+  text-align: left;
+  padding-left: 2em;
+}
+.md-label {
+  border: none !important;
+}
+/** 每个分类下的任务 */
 /** 详细任务 */
 .task-details {
   background-color: #4dd0e1;
