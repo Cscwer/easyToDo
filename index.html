@@ -13,10 +13,23 @@
 	<div layout="row" id="main-panel" flex="1">
   		<div flex="16" class="all-categories" ng-controller="categoriesCtrl">
   			<div>
-  				<h2>所有分类</h2>
-  				<md-button class="md-fab md-mini" aria-label="Eat cake">
-            			<span class="glyphicon glyphicon-plus"></span>
-        		</md-button>
+  				<div class="todo">
+		  			<md-subheader class="md-no-sticky">所有任务</md-subheader>
+			  		<md-button class="md-fab md-mini" aria-label="Eat cake">
+	  					<md-tooltip md-direction="left">新增分类</md-tooltip>
+	            		<span class="glyphicon glyphicon-plus"></span>
+	        		</md-button>
+        		</div>
+        		<div class="new-categories" ng-show="true">
+	        		<md-input-container >
+				    	<span class="glyphicon glyphicon-folder-close"></span>
+				      	<input ng-model="user.email" type="email" placeholder="Email (required)" ng-required="true">
+				    </md-input-container>
+				    <div>
+						<span class="glyphicon glyphicon-ok"></span>
+			    		<span class="glyphicon glyphicon-remove"></span>
+			    	</div>
+			    </div>
   			</div>
   			<md-divider></md-divider>
   			<md-content>
@@ -24,6 +37,11 @@
 	  				<li><md-button href="">
 	  					<span class="glyphicon glyphicon-folder-close"></span>
 	  					<span>百度 IFE 项目</span>
+	  					<span></span>
+	  					<div class="categories-edit">
+			    			<span class="glyphicon glyphicon-pencil"></span>
+			    			<span class="glyphicon glyphicon-remove"></span>
+			    		</div>
 	  				</md-button></li>
 	  				<li><md-button href="">
 	  					<span class="glyphicon glyphicon-folder-close"></span>
@@ -46,21 +64,39 @@
   	 	</div>
 	  	<div flex="33" class="all-tasks" ng-controller="allTaskCtrl">
 	  		<md-content>
+	  			<div class="new-task">
+		  			<md-subheader class="md-no-sticky">添加新任务</md-subheader>
+		  			<md-input-container >
+				      	<input ng-model="user.email" type="email" placeholder="任务标题" ng-required="true">
+				    </md-input-container>
+			  		<md-button class="md-fab md-mini" aria-label="Eat cake">
+	  					<md-tooltip md-direction="left">增加</md-tooltip>
+	            		<span class="glyphicon glyphicon-plus"></span>
+	        		</md-button>
+        		</div>
+        		<md-divider></md-divider>
 	  			<md-list>
-	  				<md-subheader class="md-no-sticky">TODO</md-subheader>
+	  				<div class="todo">
+		  				<md-subheader class="md-no-sticky">TODO</md-subheader>
+        			</div>
   					<md-list-item ng-repeat="message in messages">
-  						<md-checkbox ng-model="message.selected">
-  							{{message.title}}
-  						</md-checkbox>
+	  					<md-checkbox ng-model="message.selected">
+	  						{{ message.title }}
+	  					</md-checkbox>
+	  					<div class="task-edit">
+	  						<span class="glyphicon glyphicon-pencil"></span>
+				    		<span class="glyphicon glyphicon-remove"></span>
+				    	</div>
   					</md-list-item>
   					<md-divider></md-divider>
   					<md-subheader class="md-no-sticky">DONE</md-subheader>
-  					<md-list-item ng-repeat="topping in toppings">
-  					<label>
+  					<md-list-item ng-repeat="topping in toppings" class="task-finished">
     					<md-checkbox class="md-secondary" ng-model="topping.wanted">
     						{{ topping.name }}
     					</md-checkbox>
-    				</label>
+    					<div class="task-remove">
+			    			<span class="glyphicon glyphicon-remove"></span>
+			    		</div>
   					</md-list-item>
 	  			</md-list>
 	  		</md-content>	

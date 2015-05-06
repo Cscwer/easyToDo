@@ -26,6 +26,7 @@ ul {
 button, li{
 	width: 100%;
 	padding: 0;
+	position: relative;
 }
 header {
 	background-color: #3949ab;
@@ -42,7 +43,8 @@ footer {
 @font-family:'Glyphicons Halflings';
 .glyphicon {
 	font-family: @font-family;
-	font-wight: 400;
+	font-weight: 400;
+	cursor: pointer;
 }
 .glyphicon-folder-close:before {
 	// content:"\e117";
@@ -51,6 +53,15 @@ footer {
 .glyphicon-plus:before{
 	color: #fff;
 	content: "\2b";
+}
+.glyphicon-ok:before{
+	content:"\e013";
+}
+.glyphicon-remove:before{
+ 	content:"\e014";
+}
+.glyphicon-pencil:before {
+	content:"\270f";
 }
 
 
@@ -62,10 +73,14 @@ footer {
 /** 所有任务分类 */
 .all-categories, .all-tasks{
 	position: relative;
+	min-width: 226px;
 	border-right: 1px solid rgba(0,0,0,.2)
 }
 .all-categories {
 	width: 100%;
+}
+.all-categories > div{
+	position: relative;
 }
 
 .all-categories > div > *, {
@@ -74,8 +89,43 @@ footer {
 }
 .all-categories > div > .md-mini {
 	position: absolute;
-	top: 1em;
-	right: 1.1em;
+	top: 2px;
+	right: 1em;
+}
+
+md-input-container > span {
+	top: 17px;
+	display: inline-block;
+	position: absolute;
+}
+md-input-container > input{
+	display: inline-block;
+	margin-left: 1.5em;
+}
+
+md-input-container .md-placeholder{
+	margin-left: 1.5em;
+	top: -12px;
+}
+md-input-container + div {
+	display: inline-block;
+	right: 4px;
+	bottom: 24px;
+	position: absolute;
+}
+.new-categories {
+	display: block !important;
+	position: relative;
+}
+.new-categories  input{
+	margin-right: 2.5em;
+}
+
+
+.categories-edit {
+	position: absolute;
+	top: 5px;
+	right: 5px;
 }
 
 a.md-button {
@@ -88,10 +138,54 @@ a.md-button {
 }
 /** 每个分类下的任务 */
 .all-tasks {
-
+	// overflow-y: scroll;
 }
-.all-tasks {
 
+.todo > button {
+	position: absolute;
+	right: 1em;
+	top: 2px;
+}
+
+
+
+.all-tasks md-list-item {
+	display: flex;
+	position: relative;
+}
+.all-tasks md-list-item md-checkbox {
+	top: 0;
+}
+.all-tasks .task-edit, .task-remove{
+	// display: inline-block;
+	position: absolute;
+	padding-right: 1em;
+	top: 20px;
+	right: .1em;
+}
+.all-tasks .task-edit span {
+	padding-left: .5em;
+}
+
+.new-task  input{
+	margin-right: 4em;
+}
+
+.new-task .md-mini {
+	position: absolute;
+	top: 38px;
+	right: 1em;
+}
+
+
+
+/** 完成的任务 */
+.task-finished  span {
+	color: rgba(0,0,0,.4);
+	text-decoration: line-through;
+}
+.task-remove span {
+	text-decoration: none;
 }
 
 
