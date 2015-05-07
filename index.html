@@ -62,7 +62,7 @@
 	  			</ul>
   			</md-content>
   	 	</div>
-	  	<div flex="33" class="all-tasks" ng-controller="allTaskCtrl">
+	  	<div flex="30" class="all-tasks" ng-controller="allTaskCtrl">
 	  		<md-content>
 	  			<div class="new-task">
 		  			<md-subheader class="md-no-sticky">添加新任务</md-subheader>
@@ -75,34 +75,66 @@
 	        		</md-button>
         		</div>
         		<md-divider></md-divider>
-	  			<md-list>
-	  				<div class="todo">
-		  				<md-subheader class="md-no-sticky">TODO</md-subheader>
-        			</div>
-  					<md-list-item ng-repeat="message in messages">
-	  					<md-checkbox ng-model="message.selected">
-	  						{{ message.title }}
-	  					</md-checkbox>
-	  					<div class="task-edit">
-	  						<span class="glyphicon glyphicon-pencil"></span>
-				    		<span class="glyphicon glyphicon-remove"></span>
-				    	</div>
-  					</md-list-item>
-  					<md-divider></md-divider>
-  					<md-subheader class="md-no-sticky">DONE</md-subheader>
-  					<md-list-item ng-repeat="topping in toppings" class="task-finished">
-    					<md-checkbox class="md-secondary" ng-model="topping.wanted">
-    						{{ topping.name }}
-    					</md-checkbox>
-    					<div class="task-remove">
-			    			<span class="glyphicon glyphicon-remove"></span>
-			    		</div>
-  					</md-list-item>
-	  			</md-list>
+        		<!-- 任务标题 -->
+				<md-tabs md-dynamic-height md-border-bottom>
+				    <md-tab label="all">
+				        <md-content class="md-padding">
+				          <md-list-item ng-repeat="task in allTasks" ng-class="{true: 'task-finished', false:'test'}[task.selected]">
+			  					<md-checkbox ng-model="task.selected">
+			  						{{ task.title }}
+			  					</md-checkbox>
+			  					<div class="task-remove">
+			  						<span class="glyphicon glyphicon-pencil"></span>
+						    		<span class="glyphicon glyphicon-remove"></span>
+						    	</div>
+	  						</md-list-item>
+				        </md-content>
+				    </md-tab>
+			        <md-tab label="TODO">
+				        <md-content class="md-padding">
+					        <md-list-item ng-repeat="message in messages">
+			  					<md-checkbox ng-model="message.selected">
+			  						{{ message.title }}
+			  					</md-checkbox>
+			  					<div class="task-edit">
+			  						<span class="glyphicon glyphicon-pencil"></span>
+						    		<span class="glyphicon glyphicon-remove"></span>
+						    	</div>
+	  						</md-list-item>
+				        </md-content>
+			        </md-tab>
+				    <md-tab label="DONE">
+				        <md-content class="md-padding">
+						    <md-list-item ng-repeat="topping in toppings" class="task-finished">
+		    					<md-checkbox class="md-secondary" ng-model="topping.wanted">
+		    						{{ topping.title }}
+		    					</md-checkbox>
+		    					<div class="task-remove">
+					    			<span class="glyphicon glyphicon-remove"></span>
+					    		</div>
+		  					</md-list-item>
+				        </md-content>
+				    </md-tab>
+    			</md-tabs>
 	  		</md-content>	
 	  	</div>
 	  	<div flex="50" class="task-details">
-	  		
+	  		<md-subheader class="md-no-sticky">任务标题</md-subheader>
+	  		<div class="task-edit-button">
+	  			<md-button class="md-raised md-warn">保存</md-button>
+	  			<md-button class="md-raised">取消</md-button>
+	  		</div>
+	  		<md-divider></md-divider>
+	  		<div class="task-date">
+	  			<span>任务开始日期：</span>
+	  			<span>2015-04-06</span>
+	  			<span>任务截止日期：</span>
+	  			<span>2015-04-15</span>
+	  		</div>
+	  		<md-divider></md-divider>
+	  		<div class="task-content">
+	  			测试
+	  		</div>
 	  	</div>
 	</div>
 	<footer></footer>
