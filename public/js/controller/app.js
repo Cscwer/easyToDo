@@ -3,7 +3,7 @@
  * @author waterbear
  * @type {[type]}
  */
-var app = angular.module('easyToDo', ['ngMaterial', 'ngAria']);
+var app = angular.module('easyToDo', ['ngMaterial',  'materialCalendar']);
 app.config(['$mdThemingProvider', function($mdThemingProvider) {
 	$mdThemingProvider
 		.theme('default')

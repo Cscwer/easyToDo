@@ -16,9 +16,9 @@
   "author": "waterbear",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Cscwer/easyToDo/issues"
+    "url": "https://github.com/dsxbb/easyToDo/issues"
   },
-  "homepage": "https://github.com/Cscwer/easyToDo",
+  "homepage": "https://github.com/dsxbb/easyToDo",
   "devDependencies": {
     "angular": "^1.3.15",
     "angular-animate": "^1.3.15",
