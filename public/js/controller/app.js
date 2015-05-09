@@ -39,7 +39,6 @@ app.controller('easyToDoCtrl', function($scope){
 
 	/** 所有任务 */
 	$scope.allTasks = [
-		
     	{ title: "Message B", selected: false},
     	{ title: "A", selected: false},
     	{ title: "Message C", selected: false},
@@ -63,9 +62,6 @@ app.controller('easyToDoCtrl', function($scope){
     $scope.taskChange = function(index) {
     	$scope.taskItem = index;
     }
-
-
-
 
     /** 任务详情 */
 
