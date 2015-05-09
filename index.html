@@ -6,12 +6,12 @@
 	<link rel="stylesheet" href="/node_modules/angular-material/angular-material.min.css">
 	<link rel="stylesheet" href="/public/css/easyToDo.css">
 </head>
-<body layout="column" md-theme="default">
+<body layout="column" md-theme="default" ng-controller="easyToDoCtrl">
 	<header>
 		easyToDo
 	</header>
 	<div layout="row" id="main-panel" flex="1">
-  		<div flex="16" class="all-categories" ng-controller="categoriesCtrl">
+  		<div flex="16" class="all-categories">
   			<div>
   				<div class="todo">
 		  			<md-subheader class="md-no-sticky">所有任务</md-subheader>
@@ -20,10 +20,10 @@
 	            		<span class="glyphicon glyphicon-plus"></span>
 	        		</md-button>
         		</div>
-        		<div class="new-categories" ng-show="true">
+        		<div class="new-categories">
 	        		<md-input-container >
 				    	<span class="glyphicon glyphicon-folder-close"></span>
-				      	<input ng-model="user.email" type="email" placeholder="Email (required)" ng-required="true">
+				      	<input ng-model="user.email" type="email" placeholder="新分类" ng-required="true">
 				    </md-input-container>
 				    <div>
 						<span class="glyphicon glyphicon-ok"></span>
@@ -34,35 +34,22 @@
   			<md-divider></md-divider>
   			<md-content>
 	  			<ul>
-	  				<li><md-button href="">
-	  					<span class="glyphicon glyphicon-folder-close"></span>
-	  					<span>百度 IFE 项目</span>
-	  					<span></span>
-	  					<div class="categories-edit">
-			    			<span class="glyphicon glyphicon-pencil"></span>
-			    			<span class="glyphicon glyphicon-remove"></span>
-			    		</div>
-	  				</md-button></li>
-	  				<li><md-button href="">
-	  					<span class="glyphicon glyphicon-folder-close"></span>
-	  					<span>毕业设计</span>
-	  				</md-button></li>
-	  				<li><md-button href="">
-	  					<span class="glyphicon glyphicon-folder-close"></span>
-	  					<span>社团活动</span></md-button>
+	  				<li ng-repeat="cate in categories" ng-mouseover="show = true" ng-mouseleave="show=false"ng-init="show=false"
+	  				>
+		  				<md-button href="" ng-click="cateChange($index)" ng-class="{true:'active',false:'test'}[$index == cateItem]">
+		  					<span class="glyphicon glyphicon-folder-close"></span>
+		  					<span>{{cate.content}}</span>
+		  					<span></span>
+		  					<div class="categories-edit" ng-show="show">
+				    			<span class="glyphicon glyphicon-pencil"></span>
+				    			<span class="glyphicon glyphicon-remove"></span>
+				    		</div>
+		  				</md-button>
 	  				</li>
-	  				<li><md-button href="">
-	  					<span class="glyphicon glyphicon-folder-close"></span>
-	  					<span>家庭分类</span>
-	  				</md-button></li>
-	  				<li><md-button href="">
-	  					<span class="glyphicon glyphicon-folder-close"></span>
-	  					<span>默认分类</span>
-	  				</md-button></li>
 	  			</ul>
   			</md-content>
   	 	</div>
-	  	<div flex="30" class="all-tasks" ng-controller="allTaskCtrl">
+	  	<div flex="30" class="all-tasks">
 	  		<md-content>
 	  			<div class="new-task">
 		  			<md-subheader class="md-no-sticky">添加新任务</md-subheader>
@@ -79,12 +66,12 @@
 				<md-tabs md-dynamic-height md-border-bottom>
 				    <md-tab label="all">
 				        <md-content class="md-padding">
-				          <md-list-item ng-repeat="task in allTasks" ng-class="{true: 'task-finished', false:'test'}[task.selected]">
+				          <md-list-item ng-repeat="task in allTasks" ng-class="{true:'task-finished',false:'test'}[task.selected]" ng-mouseenter="show = true" ng-mouseleave="show=false" ng-init="show=false" ng-click="taskChange($index)">
 			  					<md-checkbox ng-model="task.selected">
 			  						{{ task.title }}
 			  					</md-checkbox>
-			  					<div class="task-remove">
-			  						<span class="glyphicon glyphicon-pencil"></span>
+			  					<div class="task-remove" ng-show="show">
+			  						<span class="glyphicon glyphicon-pencil" ng-hide="task.selected"></span>
 						    		<span class="glyphicon glyphicon-remove"></span>
 						    	</div>
 	  						</md-list-item>
@@ -92,24 +79,26 @@
 				    </md-tab>
 			        <md-tab label="TODO">
 				        <md-content class="md-padding">
-					        <md-list-item ng-repeat="message in messages">
-			  					<md-checkbox ng-model="message.selected">
-			  						{{ message.title }}
-			  					</md-checkbox>
-			  					<div class="task-edit">
-			  						<span class="glyphicon glyphicon-pencil"></span>
-						    		<span class="glyphicon glyphicon-remove"></span>
-						    	</div>
+					        <md-list-item ng-repeat="task in allTasks" ng-mouseover="show = true" ng-mouseleave="show=false" ng-init="show=false" ng-show="!task.selected">
+				  					<md-checkbox ng-model="task.selected">
+				  						{{ task.title }}
+				  					</md-checkbox>
+				  					<div class="task-edit" ng-show="show">
+				  						<span class="glyphicon glyphicon-pencil"></span>
+							    		<span class="glyphicon glyphicon-remove"></span>
+							    	</div>
+						    
 	  						</md-list-item>
 				        </md-content>
 			        </md-tab>
 				    <md-tab label="DONE">
 				        <md-content class="md-padding">
-						    <md-list-item ng-repeat="topping in toppings" class="task-finished">
-		    					<md-checkbox class="md-secondary" ng-model="topping.wanted">
-		    						{{ topping.title }}
+						    <md-list-item ng-repeat="task in allTasks" class="task-finished" ng-mouseover="show = true" ng-mouseleave="show=false" ng-init="show=false"
+						    ng-show="task.selected">
+		    					<md-checkbox class="md-secondary" ng-model="task.selected">
+		    						{{ task.title }}
 		    					</md-checkbox>
-		    					<div class="task-remove">
+		    					<div class="task-remove" ng-show="show">
 					    			<span class="glyphicon glyphicon-remove"></span>
 					    		</div>
 		  					</md-list-item>
@@ -119,7 +108,7 @@
 	  		</md-content>	
 	  	</div>
 	  	<div flex="50" class="task-details">
-	  		<md-subheader class="md-no-sticky">任务标题</md-subheader>
+	  		<md-subheader class="md-no-sticky">{{allTasks[taskItem].title }}</md-subheader>
 	  		<div class="task-edit-button">
 	  			<md-button class="md-raised md-warn">保存</md-button>
 	  			<md-button class="md-raised">取消</md-button>
