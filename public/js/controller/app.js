@@ -21,7 +21,6 @@ app.controller('easyToDoCtrl', function($scope){
 	
 	/** 任务分类 */
 	$scope.categories = [
-
 		{content: '百度 IFE 项目'},
 		{content: '毕业设计'},
 		{content: '社团活动'},

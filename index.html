@@ -21,7 +21,7 @@
 	            		<span class="glyphicon glyphicon-plus"></span>
 	        		</md-button>
         		</div>
-        		<div class="new-categories">
+        		<div id="new-categories">
 	        		<md-input-container >
 				    	<span class="glyphicon glyphicon-folder-close"></span>
 				      	<input ng-model="user.email" type="email" placeholder="新分类" ng-required="true">
@@ -61,6 +61,10 @@
 	  					<md-tooltip md-direction="left">增加</md-tooltip>
 	            		<span class="glyphicon glyphicon-plus"></span>
 	        		</md-button>
+	        		<div class="new-task-title">
+				    	<span class="glyphicon glyphicon-ok"></span>
+				    	<span class="glyphicon glyphicon-remove"></span>
+				    </div>
         		</div>
         		<md-divider></md-divider>
         		<!-- 任务标题 -->
@@ -115,17 +119,18 @@
 	  			<md-button class="md-raised">取消</md-button>
 	  		</div>
 	  		<md-divider></md-divider>
+
 	  		<div class="task-date">
-	  			<span>任务开始日期：</span>
+	  			<span>开始日期：</span>
 	  			<span>2015-04-06</span>
-	  			<span>任务截止日期：</span>
+	  			<span>截止日期：</span>
 	  			<span>2015-04-15</span>
 	  		</div>
 	  		<md-divider></md-divider>
+	  		<md-calendar data-day-format="d"></md-calendar>
 	  		<div class="task-content">
 	  			测试
 	  		</div>
-	  		<md-calendar data-day-format="d"></md-calendar>
 	  	</div>
 	</div>
 	<footer></footer>

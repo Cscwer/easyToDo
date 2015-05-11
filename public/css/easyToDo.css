@@ -96,11 +96,11 @@ md-input-container + div {
   bottom: 24px;
   position: absolute;
 }
-.new-categories {
-  display: block !important;
+#new-categories {
+  display: block;
   position: relative;
 }
-.new-categories input {
+#new-categories input {
   margin-right: 2.5em;
 }
 .categories-edit {
@@ -113,8 +113,8 @@ a.md-button {
   text-align: left;
   padding-left: 2em;
 }
-.md-label {
-  border: none !important;
+.all-tasks .md-label {
+  border: none;
 }
 /** 每个分类下的任务 */
 .all-tasks {
@@ -142,13 +142,22 @@ a.md-button {
 .all-tasks .task-edit span {
   padding-left: .5em;
 }
+.new-task {
+  display: relative;
+}
 .new-task input {
   margin-right: 4em;
 }
 .new-task .md-mini {
   position: absolute;
-  top: 38px;
+  top: 2px;
   right: 1em;
+}
+.new-task-title {
+  display: inline-block;
+  position: absolute;
+  top: 59px;
+  right: 11px;
 }
 /** 完成的任务 */
 .task-finished span {
@@ -183,4 +192,11 @@ a.md-button {
 /** 点击后的样式 */
 .active {
   color: #03a9f4;
+}
+/** 日历样式 */
+h2.md-calendar-title {
+  font-size: 1em;
+}
+.md-calendar {
+  width: 20em;
 }
