@@ -16,26 +16,26 @@
   			<div>
   				<div class="todo">
 		  			<md-subheader class="md-no-sticky">所有任务</md-subheader>
-			  		<md-button class="md-fab md-mini" aria-label="Eat cake">
+			  		<md-button class="md-fab md-mini" aria-label="Eat cake" ng-click="cateEditShow=true">
 	  					<md-tooltip md-direction="left">新增分类</md-tooltip>
 	            		<span class="glyphicon glyphicon-plus"></span>
 	        		</md-button>
         		</div>
-        		<div id="new-categories">
+        		<div id="new-categories" ng-show="cateEditShow">
 	        		<md-input-container >
 				    	<span class="glyphicon glyphicon-folder-close"></span>
 				      	<input ng-model="user.email" type="email" placeholder="新分类" ng-required="true">
 				    </md-input-container>
 				    <div>
 						<span class="glyphicon glyphicon-ok"></span>
-			    		<span class="glyphicon glyphicon-remove"></span>
+			    		<span class="glyphicon glyphicon-remove" ng-click="cateEditShow=false"></span>
 			    	</div>
 			    </div>
   			</div>
   			<md-divider></md-divider>
   			<md-content>
 	  			<ul>
-	  				<li ng-repeat="cate in categories" ng-mouseover="show = true" ng-mouseleave="show=false"ng-init="show=false"
+	  				<li ng-repeat="cate in categories" ng-mouseover="show = true" ng-mouseleave="show=false" ng-init="show=false"
 	  				>
 		  				<md-button href="" ng-click="cateChange($index)" ng-class="{true:'active',false:'test'}[$index == cateItem]">
 		  					<span class="glyphicon glyphicon-folder-close"></span>
@@ -54,17 +54,19 @@
 	  		<md-content>
 	  			<div class="new-task">
 		  			<md-subheader class="md-no-sticky">添加新任务</md-subheader>
-		  			<md-input-container >
-				      	<input ng-model="user.email" type="email" placeholder="任务标题" ng-required="true">
-				    </md-input-container>
-			  		<md-button class="md-fab md-mini" aria-label="Eat cake">
-	  					<md-tooltip md-direction="left">增加</md-tooltip>
+		  			<md-button class="md-fab md-mini" aria-label="Eat cake" ng-click="newTaskEdit=true">
+	  					<md-tooltip md-direction="left">新增任务</md-tooltip>
 	            		<span class="glyphicon glyphicon-plus"></span>
 	        		</md-button>
-	        		<div class="new-task-title">
-				    	<span class="glyphicon glyphicon-ok"></span>
-				    	<span class="glyphicon glyphicon-remove"></span>
-				    </div>
+	        		<div ng-show="newTaskEdit">
+			  			<md-input-container >
+					      	<input ng-model="user.email" type="email" placeholder="任务标题" ng-required="true">
+					    </md-input-container>
+		        		<div class="new-task-title">
+					    	<span class="glyphicon glyphicon-ok"></span>
+					    	<span class="glyphicon glyphicon-remove" ng-click="newTaskEdit=false"></span>
+					    </div>
+					</div>
         		</div>
         		<md-divider></md-divider>
         		<!-- 任务标题 -->

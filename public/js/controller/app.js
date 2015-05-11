@@ -36,6 +36,12 @@ app.controller('easyToDoCtrl', function($scope){
 		email: ''
 	};
 
+	/** 显示分类编辑框 */
+	$scope.cateEditShow = false;
+
+	/** 显示任务编辑框 */
+	$scope.newTaskEdit = false;
+
 	/** 所有任务 */
 	$scope.allTasks = [
     	{ title: "Message B", selected: false},
