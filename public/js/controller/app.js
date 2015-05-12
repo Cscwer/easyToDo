@@ -11,13 +11,17 @@ app.config(['$mdThemingProvider', function($mdThemingProvider) {
       		default: '700'
     	});
 }]);
-
+app.filter('title', function() {
+	return function(input) {
+		return input ? input : '任务标题';
+	}
+});
 /**
  * 主控制器
  * @param  {[type]} $scope [description]
  * @return {[type]}        [description]
  */
-app.controller('easyToDoCtrl', function($scope){
+app.controller('easyToDoCtrl', function($scope, $mdToast, $animate){
 	
 	/** 任务分类 */
 	$scope.categories = [
@@ -69,6 +73,42 @@ app.controller('easyToDoCtrl', function($scope){
     }
 
     /** 任务详情 */
+
+    /** 显示日历 */
+    $scope.calendarShow = false;
+
+    /**
+     * 显示弹出框
+     */
+     $scope.toastPosition = {
+	    bottom: false,
+	    top: true,
+	    left: true,
+	    right: false
+  	};
+
+	$scope.getToastPosition = function() {
+		return Object.keys($scope.toastPosition)
+		    .filter(function(pos) { return $scope.toastPosition[pos]; })
+		    .join(' ');
+	};
+
+	$scope.showCustomToast = function() {
+		console.log($scope.getToastPosition());
+	    $mdToast.show({
+	      controller: 'easyToDoCtrl',
+	      templateUrl: '/public/template/toast-attention.html',
+	      hideDelay: 60000,
+	      position: $scope.getToastPosition()
+	    });
+	};
+
+	$scope.closeToast = function() {
+		$mdToast.hide();
+	}
+	$scope.cancel = function() {
+		$mdToast.hide();
+	}
 
 });
 

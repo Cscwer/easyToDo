@@ -43,7 +43,7 @@
 		  					<span></span>
 		  					<div class="categories-edit" ng-show="show">
 				    			<span class="glyphicon glyphicon-pencil"></span>
-				    			<span class="glyphicon glyphicon-remove"></span>
+				    			<span class="glyphicon glyphicon-remove" ng-click="showCustomToast()"></span>
 				    		</div>
 		  				</md-button>
 	  				</li>
@@ -115,24 +115,30 @@
 	  		</md-content>	
 	  	</div>
 	  	<div flex="50" class="task-details">
-	  		<md-subheader class="md-no-sticky">{{allTasks[taskItem].title }}</md-subheader>
+	  		<md-subheader class="md-no-sticky">
+	  			{{allTasks[taskItem].title | title}}
+	  		</md-subheader>
 	  		<div class="task-edit-button">
-	  			<md-button class="md-raised md-warn">保存</md-button>
-	  			<md-button class="md-raised">取消</md-button>
+		  		<md-button class="md-raised md-warn">保存</md-button>
+		  		<md-button class="md-raised">取消</md-button>
 	  		</div>
 	  		<md-divider></md-divider>
-
 	  		<div class="task-date">
 	  			<span>开始日期：</span>
 	  			<span>2015-04-06</span>
 	  			<span>截止日期：</span>
 	  			<span>2015-04-15</span>
+	  			<div ng-click="calendarShow=!calendarShow" ng-class="{glyphiconactive: calendarShow}">
+	  				<span id="chevron" class="glyphicon glyphicon-chevron-left" ></span>
+	  			</div>
+	  			
 	  		</div>
 	  		<md-divider></md-divider>
-	  		<md-calendar data-day-format="d"></md-calendar>
+	  		<md-calendar data-day-format="d" ng-show="calendarShow"></md-calendar>
 	  		<div class="task-content">
 	  			测试
 	  		</div>
+	  		
 	  	</div>
 	</div>
 	<footer></footer>

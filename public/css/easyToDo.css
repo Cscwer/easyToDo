@@ -54,6 +54,9 @@ footer {
 .glyphicon-pencil:before {
   content: "\270f";
 }
+.glyphicon-chevron-left:before {
+  content: "\e079";
+}
 /** 主面板 */
 /** 所有任务分类 */
 .all-categories,
@@ -172,7 +175,8 @@ a.md-button {
   position: relative;
 }
 /** 任务详情 */
-.task-date span {
+.task-date span,
+.task-date div {
   display: inline-block;
 }
 .task-date span:nth-child(odd) {
@@ -184,10 +188,17 @@ a.md-button {
 .task-content {
   padding: 1em;
 }
+#chevron {
+  padding: 1em;
+}
+.glyphiconactive {
+  transform: rotate(-90deg);
+  transition: transform 0.2s;
+}
 .task-edit-button {
   position: absolute;
   top: .5em;
-  right: 2em;
+  right: 4em;
 }
 /** 点击后的样式 */
 .active {
@@ -198,5 +209,9 @@ h2.md-calendar-title {
   font-size: 1em;
 }
 .md-calendar {
-  width: 20em;
+  width: 26em;
+}
+md-toast.md-left {
+  margin-left: 50%;
+  left: -3em;
 }
