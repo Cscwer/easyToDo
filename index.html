@@ -24,11 +24,11 @@
         		<div id="new-categories" ng-show="cateEditShow">
 	        		<md-input-container >
 				    	<span class="glyphicon glyphicon-folder-close"></span>
-				      	<input ng-model="user.email" type="email" placeholder="新分类" ng-required="true">
+				      	<input ng-model="user.newCate" type="text" placeholder="新分类" ng-required="true">
 				    </md-input-container>
 				    <div>
-						<span class="glyphicon glyphicon-ok"></span>
-			    		<span class="glyphicon glyphicon-remove" ng-click="cateEditShow=false"></span>
+						<span class="glyphicon glyphicon-ok" ng-click="addNewCate()"></span>
+			    		<span class="glyphicon glyphicon-remove" ng-click="cancelEdit()"></span>
 			    	</div>
 			    </div>
   			</div>
@@ -46,11 +46,12 @@
 				    			<span class="glyphicon glyphicon-remove" ng-click="showCustomToast()"></span>
 				    		</div>
 		  				</md-button>
+
 	  				</li>
 	  			</ul>
   			</md-content>
   	 	</div>
-	  	<div flex="30" class="all-tasks">
+	  	<div flex="30" class="all-tasks" ng-controller="allTasksCtrl">
 	  		<md-content>
 	  			<div class="new-task">
 		  			<md-subheader class="md-no-sticky">添加新任务</md-subheader>
@@ -114,9 +115,9 @@
     			</md-tabs>
 	  		</md-content>	
 	  	</div>
-	  	<div flex="50" class="task-details">
+	  	<div flex="50" class="task-details" ng-controller="taskDetailCtrl">
 	  		<md-subheader class="md-no-sticky">
-	  			{{allTasks[taskItem].title | title}}
+	  			{{details.title | title}}
 	  		</md-subheader>
 	  		<div class="task-edit-button">
 		  		<md-button class="md-raised md-warn">保存</md-button>
@@ -148,6 +149,7 @@
 	<script src="/node_modules/angular-aria/angular-aria.min.js"></script>
 	<script src="/node_modules/angular-material/angular-material.min.js"></script>
 	<script src="/public/js/lib/angular-material-calendar.js"></script>
-	<script src="/public/js/controller/app.js"></script>
+	<script src="/public/js/services/easy.model.js"></script>
+	<script src="/public/js/controllers/app.js"></script>
 </body>
 </html>

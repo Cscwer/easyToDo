@@ -57,6 +57,10 @@ footer {
 .glyphicon-chevron-left:before {
   content: "\e079";
 }
+/** 取消默认的样式 */
+.md-button {
+  text-transform: none;
+}
 /** 主面板 */
 /** 所有任务分类 */
 .all-categories,
@@ -213,5 +217,5 @@ h2.md-calendar-title {
 }
 md-toast.md-left {
   margin-left: 50%;
-  left: -3em;
+  left: -10em;
 }
