@@ -113,6 +113,15 @@ app.controller('allTasksCtrl', function($scope, model) {
     	$scope.$emit('changeTask',index);
     }
 
+    /** 增加新任务 */
+    $scope.addNewTask = function() {
+    	$scope.allTasks.unshift({
+    		title: $scope.user.title,
+    		selected: false
+    	});
+    	$scope.newTaskEdit = false;
+    	$scope.user.title = '';
+    }
 
 });
 
