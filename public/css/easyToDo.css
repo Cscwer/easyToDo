@@ -178,6 +178,17 @@ a.md-button {
 .task-details {
   position: relative;
 }
+.task-title {
+  position: relative;
+}
+.task-title md-input-container {
+  max-width: 20em;
+}
+.task-title .task-edit-button {
+  position: absolute;
+  left: 21em;
+  top: 1.3em;
+}
 /** 任务详情 */
 .task-date span,
 .task-date div {

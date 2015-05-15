@@ -14,17 +14,17 @@
 	<div layout="row" id="main-panel" flex="1">
   		<div flex="16" class="all-categories">
   			<div>
-  				<div class="todo">
+  				<div class="todo" ng-click="show=true">
 		  			<md-subheader class="md-no-sticky">所有任务</md-subheader>
-			  		<md-button class="md-fab md-mini" aria-label="Eat cake" ng-click="cateEditShow=true">
+			  		<md-button class="md-fab md-mini" aria-label="Eat cake" ng-click="cateEditShow=true;" ng-init="show=false">
 	  					<md-tooltip md-direction="left">新增分类</md-tooltip>
 	            		<span class="glyphicon glyphicon-plus"></span>
 	        		</md-button>
         		</div>
-        		<div id="new-categories" ng-show="cateEditShow">
+        		<div id="new-categories" ng-show="cateEditShow" ng-init="show=false">
 	        		<md-input-container >
 				    	<span class="glyphicon glyphicon-folder-close"></span>
-				      	<input ng-model="user.newCate" type="text" placeholder="新分类" ng-required="true">
+				      	<input ng-model="user.newCate" type="text" placeholder="新分类" ng-required="true" focus-me="show">
 				    </md-input-container>
 				    <div>
 						<span class="glyphicon glyphicon-ok" ng-click="addNewCate()"></span>
@@ -46,14 +46,13 @@
 				    			<span class="glyphicon glyphicon-remove" ng-click="showCustomToast()"></span>
 				    		</div>
 		  				</md-button>
-
 	  				</li>
 	  			</ul>
   			</md-content>
   	 	</div>
 	  	<div flex="30" class="all-tasks" ng-controller="allTasksCtrl">
 	  		<md-content>
-	  			<div class="new-task">
+	  			<div class="new-task" ng-init="show=false" ng-click="show=true">
 		  			<md-subheader class="md-no-sticky">添加新任务</md-subheader>
 		  			<md-button class="md-fab md-mini" aria-label="Eat cake" ng-click="newTaskEdit=true">
 	  					<md-tooltip md-direction="left">新增任务</md-tooltip>
@@ -61,7 +60,7 @@
 	        		</md-button>
 	        		<div ng-show="newTaskEdit">
 			  			<md-input-container >
-					      	<input ng-model="user.title" type="text" placeholder="任务标题" ng-required="true">
+					      	<input ng-model="user.title" type="text" placeholder="任务标题" ng-required="true" focus-me="show">
 					    </md-input-container>
 		        		<div class="new-task-title">
 					    	<span class="glyphicon glyphicon-ok" ng-click="addNewTask()"></span>
@@ -94,8 +93,9 @@
 				  					<div class="task-edit" ng-show="show">
 				  						<span class="glyphicon glyphicon-pencil"></span>
 							    		<span class="glyphicon glyphicon-remove"></span>
+							    		<span class="glyphicon glyphicon-ok"></span>
 							    	</div>
-						    
+					
 	  						</md-list-item>
 				        </md-content>
 			        </md-tab>
@@ -117,10 +117,15 @@
 	  	</div>
 	  	<div flex="50" class="task-details" ng-controller="taskDetailCtrl">
 	  		<md-subheader class="md-no-sticky">
-	  			{{details.title | title}}
+	  			{{details.title | title}}		
 	  		</md-subheader>
+	  		<div ng-show="isEdit" class="task-title">
+	  			<md-input-container >
+			      	<input ng-model="details.title" type="text" placeholder="任务标题" ng-required="true" focus-me="true">
+			    </md-input-container>
+			</div>
 	  		<div class="task-edit-button">
-		  		<md-button class="md-raised md-warn">保存</md-button>
+		  		<md-button class="md-raised md-warn" ng-click="saveDetais()">保存</md-button>
 		  		<md-button class="md-raised">取消</md-button>
 	  		</div>
 	  		<md-divider></md-divider>
@@ -128,15 +133,14 @@
 	  			<span>开始日期：</span>
 	  			<span>2015-04-06</span>
 	  			<span>截止日期：</span>
-	  			<span>2015-04-15</span>
+	  			<span>{{details.deadline | date: 'yyyy-MM-dd'}}</span>
 	  			<div ng-click="calendarShow=!calendarShow" ng-class="{glyphiconactive: calendarShow}">
 	  				<span id="chevron" class="glyphicon glyphicon-chevron-left" ></span>
 	  			</div>
-	  			
 	  		</div>
 	  		<md-divider></md-divider>
-	  		<md-calendar data-day-format="d" ng-show="calendarShow"></md-calendar>
-	  		<div class="task-content">
+	  		<md-calendar data-day-format="d" ng-show="calendarShow" ng-click-date="changeDate"></md-calendar>
+	  		<div class="task-content" contenteditable="true">
 	  			测试
 	  		</div>
 	  		

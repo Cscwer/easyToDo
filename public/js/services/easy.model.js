@@ -42,8 +42,8 @@ angular.module('easyToDo.services',[])
 			return allTasks;
 		};
 
-		function setTask() {
-
+		function setTask(task) {
+			allTasks.unshift(task);
 		};
 
 		function getDetail(index) {
@@ -53,6 +53,8 @@ angular.module('easyToDo.services',[])
 		return {
 			getCategories: getCategories,
 			getTask: getTask,
-			detail: getDetail
+			detail: getDetail,
+			setTask: setTask,
+			allTasks:allTasks
 		};
 	})

@@ -11,11 +11,32 @@ app.config(['$mdThemingProvider', function($mdThemingProvider) {
       		default: '700'
     	});
 }]);
+
+/**
+ * 如果任务标题为空则显示为'任务标题'
+ * @param  {[type]} ) {	return     function(input) {		return input ? input : '任务标题';	}} [description]
+ * @return {[type]}   [description]
+ */
 app.filter('title', function() {
 	return function(input) {
 		return input ? input : '任务标题';
 	}
 });
+app.directive('focusMe', function($timeout) {
+	return {
+		scope: {trigger: '=focusMe'},
+		link: function(scope, element) {
+			scope.$watch('trigger', function(value) {
+				if(value === true) {
+					element[0].focus();
+					scope.trigger = false;
+				}
+			});
+		}
+	}
+})
+
+
 /**
  * 主控制器
  * @param  {[type]} $scope [description]
@@ -97,7 +118,7 @@ app.controller('easyToDoCtrl', function($scope, $mdToast, $animate, model){
 
 app.controller('allTasksCtrl', function($scope, model) {
 	/** 所有任务 */
-	$scope.allTasks = model.getTask();
+	$scope.allTasks = model.allTasks;
 	$scope.pointer = model.pointer;
 
 	/** 显示任务编辑框 */
@@ -115,21 +136,34 @@ app.controller('allTasksCtrl', function($scope, model) {
 
     /** 增加新任务 */
     $scope.addNewTask = function() {
-    	$scope.allTasks.unshift({
+    	if(!$scope.user.title) {
+    		return;
+    	}
+    	var task = {
     		title: $scope.user.title,
     		selected: false
-    	});
+    	};
+    	$scope.allTasks.unshift(task);
     	$scope.newTaskEdit = false;
     	$scope.user.title = '';
+    	$scope.taskChange(0);
     }
 
 });
 
-app.controller('taskDetailCtrl', function($scope, model){
+app.controller('taskDetailCtrl', function($scope, $filter, model){
 
 	$scope.$on('taskIndexChange', function(evt, newIndex) {
-		$scope.details = model.detail(newIndex);
+		$scope.details = model.allTasks[newIndex];
 	});
+
 	 /** 显示日历 */
     $scope.calendarShow = false;
+    $scope.isEdit = false;
+    $scope.saveDetails = function() {
+
+    }
+    $scope.changeDate = function(date) {
+    	$scope.details.deadline = date;
+    }
 });
