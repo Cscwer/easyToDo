@@ -103,6 +103,17 @@ md-input-container + div {
   bottom: 24px;
   position: absolute;
 }
+.changeCate md-input-container > input {
+  max-width: 10em;
+  margin-left: 3em;
+}
+.changeCate md-input-container > span {
+  left: 2em;
+}
+.changeCate md-input-container .md-placeholder {
+  margin-left: 3em;
+  top: -12px;
+}
 #new-categories {
   display: block;
   position: relative;
@@ -183,11 +194,6 @@ a.md-button {
 }
 .task-title md-input-container {
   max-width: 20em;
-}
-.task-title .task-edit-button {
-  position: absolute;
-  left: 21em;
-  top: 1.3em;
 }
 /** 任务详情 */
 .task-date span,

@@ -37,15 +37,28 @@
 	  			<ul>
 	  				<li ng-repeat="cate in categories" ng-mouseover="show = true" ng-mouseleave="show=false" ng-init="show=false"
 	  				>
+	  					<div ng-show="$index!=editIndex">
 		  				<md-button href="" ng-click="cateChange($index)" ng-class="{true:'active',false:'test'}[$index == cateItem]">
 		  					<span class="glyphicon glyphicon-folder-close"></span>
 		  					<span>{{cate.content}}</span>
 		  					<span></span>
-		  					<div class="categories-edit" ng-show="show">
-				    			<span class="glyphicon glyphicon-pencil"></span>
+		  					<div class="categories-edit" ng-show="show"
+		  					ng-click="isFocus=true">
+				    			<span class="glyphicon glyphicon-pencil" ng-click="editCate($index,$event);"></span>
 				    			<span class="glyphicon glyphicon-remove" ng-click="showCustomToast()"></span>
 				    		</div>
 		  				</md-button>
+						</div>
+		  				<div class="changeCate" ng-show="$index==editIndex">
+			        		<md-input-container >
+						    	<span class="glyphicon glyphicon-folder-close"></span>
+						      	<input ng-model="categories[editIndex].content" type="text" placeholder="新分类" ng-required="true">
+						    </md-input-container>
+						    <div>
+								<span class="glyphicon glyphicon-ok" ng-click="confirmEdit()"></span>
+					    		<span class="glyphicon glyphicon-remove" ng-click="cancelEdit()"></span>
+					    	</div>
+			    		</div>
 	  				</li>
 	  			</ul>
   			</md-content>
@@ -78,7 +91,7 @@
 			  						{{ task.title }}
 			  					</md-checkbox>
 			  					<div class="task-remove" ng-show="show">
-			  						<span class="glyphicon glyphicon-pencil" ng-hide="task.selected"></span>
+			  						<!-- <span class="glyphicon glyphicon-pencil" ng-hide="task.selected"></span> -->
 						    		<span class="glyphicon glyphicon-remove"></span>
 						    	</div>
 	  						</md-list-item>
@@ -91,9 +104,8 @@
 				  						{{ task.title }}
 				  					</md-checkbox>
 				  					<div class="task-edit" ng-show="show">
-				  						<span class="glyphicon glyphicon-pencil"></span>
+				  						<!-- <span class="glyphicon glyphicon-pencil"></span> -->
 							    		<span class="glyphicon glyphicon-remove"></span>
-							    		<span class="glyphicon glyphicon-ok"></span>
 							    	</div>
 					
 	  						</md-list-item>
@@ -119,14 +131,18 @@
 	  		<md-subheader class="md-no-sticky">
 	  			{{details.title | title}}		
 	  		</md-subheader>
+	  		<div class="task-edit-button" ng-init="isFocus=false"  ng-click="isFocus=true" ng-show="!isEdit">
+	  			<span class="glyphicon glyphicon-pencil" ng-click="isEdit=true"></span>
+	  		</div>
+	  		
 	  		<div ng-show="isEdit" class="task-title">
 	  			<md-input-container >
-			      	<input ng-model="details.title" type="text" placeholder="任务标题" ng-required="true" focus-me="true">
+			      	<input ng-model="details.title" type="text" placeholder="任务标题" ng-required="true" focus-me="isFocus">
 			    </md-input-container>
 			</div>
-	  		<div class="task-edit-button">
-		  		<md-button class="md-raised md-warn" ng-click="saveDetais()">保存</md-button>
-		  		<md-button class="md-raised">取消</md-button>
+	  		<div class="task-edit-button" ng-show="isEdit">
+		  		<md-button class="md-raised md-warn" ng-click="saveDetails()">保存</md-button>
+		  		<md-button class="md-raised" ng-click="cancelEdit()">取消</md-button>
 	  		</div>
 	  		<md-divider></md-divider>
 	  		<div class="task-date">

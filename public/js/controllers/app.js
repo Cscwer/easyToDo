@@ -28,6 +28,7 @@ app.directive('focusMe', function($timeout) {
 		link: function(scope, element) {
 			scope.$watch('trigger', function(value) {
 				if(value === true) {
+					console.log(1);
 					element[0].focus();
 					scope.trigger = false;
 				}
@@ -77,9 +78,27 @@ app.controller('easyToDoCtrl', function($scope, $mdToast, $animate, model){
 	$scope.$on('changeTask', function(evt, newIndex) {
 		$scope.$broadcast('taskIndexChange', newIndex);
 
-	})
+	});
 
-	
+	/** 编辑分类 */
+	var content;
+	$scope.editIndex = null;
+	$scope.editCate = function(index, $event) {
+		$scope.editIndex = index;
+		content = $scope.categories[index].content;
+		$event.preventDefault();
+		$event.stopPropagation();
+	};
+
+	$scope.cancelEdit = function() {
+		$scope.categories[$scope.editIndex].content = content;
+		$scope.editIndex = null;
+
+	}
+
+	$scope.confirmEdit = function() {
+		$scope.editIndex = null;
+	}
 
     /**
      * 显示弹出框
@@ -153,17 +172,28 @@ app.controller('allTasksCtrl', function($scope, model) {
 
 app.controller('taskDetailCtrl', function($scope, $filter, model){
 
+	var title;
 	$scope.$on('taskIndexChange', function(evt, newIndex) {
 		$scope.details = model.allTasks[newIndex];
+		title = $scope.details.title;
 	});
 
 	 /** 显示日历 */
     $scope.calendarShow = false;
     $scope.isEdit = false;
-    $scope.saveDetails = function() {
 
-    }
+    /** 保存修改 */
+    $scope.saveDetails = function() {
+    	$scope.calendarShow = false;
+    	$scope.isEdit = false;
+    };
+
     $scope.changeDate = function(date) {
     	$scope.details.deadline = date;
+    };
+
+    $scope.cancelEdit = function() {
+    	$scope.details.title = title;
+    	$scope.isEdit = false;
     }
 });
