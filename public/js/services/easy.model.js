@@ -5,20 +5,20 @@
 angular.module('easyToDo.services',[])
 	.factory('model', function(){
 		var categories = [
-				{content: '百度 IFE 项目'},
-				{content: '毕业设计'},
-				{content: '社团活动'},
-				{content: '家庭分类'},
-				{content: 'Test'}
+				{content: 'Home'},
+				{content: '生活碎碎念'},
+				{content: '各科作业'},
+				{content: '专业技能'},
+				{content: '修身'}
 			],
 			allTasks = [
-				{ title: "Message B", selected: false},
-    			{ title: "A", selected: false},
+				{ title: "看书一小时", selected: false},
+    			{ title: "打码", selected: false},
     			{ title: "Message C", selected: false},
-    			{ title: 'Pepperoni', selected: true },
-	    		{ title: 'Sausage', selected: true },
-	    		{ title: 'Black Olives', selected: true },
-	    		{ title: 'Green Peppers', selected: true }
+    			{ title: 'node 一章', selected: true },
+	    		{ title: '博文一篇', selected: true },
+	    		{ title: '深入浅出 node', selected: true },
+	    		{ title: '深入浅出 Angular', selected: true }
 	    	];
 
 		function getCategories() {

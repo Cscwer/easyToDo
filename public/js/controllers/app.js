@@ -3,7 +3,7 @@
  * @author waterbear
  * @type {[type]}
  */
-var app = angular.module('easyToDo', ['ngMaterial',  'materialCalendar', 'easyToDo.services']);
+var app = angular.module('easyToDo', ['ngMaterial',  'materialCalendar', 'easyToDo.services', 'easyToDo.utils']);
 app.config(['$mdThemingProvider', function($mdThemingProvider) {
 	$mdThemingProvider
 		.theme('default')
@@ -28,7 +28,6 @@ app.directive('focusMe', function($timeout) {
 		link: function(scope, element) {
 			scope.$watch('trigger', function(value) {
 				if(value === true) {
-					console.log(1);
 					element[0].focus();
 					scope.trigger = false;
 				}
@@ -43,7 +42,7 @@ app.directive('focusMe', function($timeout) {
  * @param  {[type]} $scope [description]
  * @return {[type]}        [description]
  */
-app.controller('easyToDoCtrl', function($scope, $mdToast, $animate, model){
+app.controller('easyToDoCtrl', function($scope, $animate, model, toast){
 	
 	/** 任务分类 */
 	$scope.categories = model.getCategories();
@@ -69,7 +68,7 @@ app.controller('easyToDoCtrl', function($scope, $mdToast, $animate, model){
 	}
 
 	/** 取消编辑 */
-	$scope.cancelEdit = function() {
+	$scope.cancelAdd = function() {
 		$scope.cateEditShow = false;
 		$scope.user.newCate = '';
 	}
@@ -94,48 +93,31 @@ app.controller('easyToDoCtrl', function($scope, $mdToast, $animate, model){
 		$scope.categories[$scope.editIndex].content = content;
 		$scope.editIndex = null;
 
-	}
+	};
 
 	$scope.confirmEdit = function() {
 		$scope.editIndex = null;
 	}
 
-    /**
-     * 显示弹出框
-     */
-    $scope.toastPosition = {
-	    bottom: false,
-	    top: true,
-	    left: true,
-	    right: false
-  	};
-
-	$scope.getToastPosition = function() {
-		return Object.keys($scope.toastPosition)
-		    .filter(function(pos) { return $scope.toastPosition[pos]; })
-		    .join(' ');
-	};
-
-	$scope.showCustomToast = function() {
-		console.log($scope.getToastPosition());
-	    $mdToast.show({
-	      controller: 'easyToDoCtrl',
-	      templateUrl: '/public/template/toast-attention.html',
-	      hideDelay: 6000,
-	      position: $scope.getToastPosition()
-	    });
-	};
-
-	$scope.closeToast = function() {
-		$mdToast.hide();
+	/** 显示分类弹框 */
+	var delIndex;
+	$scope.showCustomToast = function(index) {
+		delIndex = index;
+		toast.showCustomToast('easyToDoCtrl');
 	}
-	$scope.cancel = function() {
-		$mdToast.hide();
+
+	$scope.confirmDel = function() {
+		$scope.categories.splice(delIndex, 1);
+		toast.closeToast();
+	}
+
+	$scope.cancelDel = function() {
+		toast.closeToast();
 	}
 
 });
 
-app.controller('allTasksCtrl', function($scope, model) {
+app.controller('allTasksCtrl', function($scope, model, toast) {
 	/** 所有任务 */
 	$scope.allTasks = model.allTasks;
 	$scope.pointer = model.pointer;
@@ -167,6 +149,23 @@ app.controller('allTasksCtrl', function($scope, model) {
     	$scope.user.title = '';
     	$scope.taskChange(0);
     }
+
+    /** 显示删除弹框 */
+	var delIndex;
+	$scope.showCustomToast = function(index) {
+		delIndex = index;
+		toast.showCustomToast('allTasksCtrl');
+	}
+
+	$scope.confirmDel = function() {
+		$scope.allTasks.splice(delIndex, 1);
+		console.log(model.allTasks);
+		toast.closeToast();
+	}
+
+	$scope.cancelDel = function() {
+		toast.closeToast();
+	}
 
 });
 

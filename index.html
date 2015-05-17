@@ -28,7 +28,7 @@
 				    </md-input-container>
 				    <div>
 						<span class="glyphicon glyphicon-ok" ng-click="addNewCate()"></span>
-			    		<span class="glyphicon glyphicon-remove" ng-click="cancelEdit()"></span>
+			    		<span class="glyphicon glyphicon-remove" ng-click="cancelAdd()"></span>
 			    	</div>
 			    </div>
   			</div>
@@ -45,7 +45,7 @@
 		  					<div class="categories-edit" ng-show="show"
 		  					ng-click="isFocus=true">
 				    			<span class="glyphicon glyphicon-pencil" ng-click="editCate($index,$event);"></span>
-				    			<span class="glyphicon glyphicon-remove" ng-click="showCustomToast()"></span>
+				    			<span class="glyphicon glyphicon-remove" ng-click="showCustomToast($index)"></span>
 				    		</div>
 		  				</md-button>
 						</div>
@@ -92,7 +92,7 @@
 			  					</md-checkbox>
 			  					<div class="task-remove" ng-show="show">
 			  						<!-- <span class="glyphicon glyphicon-pencil" ng-hide="task.selected"></span> -->
-						    		<span class="glyphicon glyphicon-remove"></span>
+						    		<span class="glyphicon glyphicon-remove" ng-click="showCustomToast($index)"></span>
 						    	</div>
 	  						</md-list-item>
 				        </md-content>
@@ -170,6 +170,7 @@
 	<script src="/node_modules/angular-material/angular-material.min.js"></script>
 	<script src="/public/js/lib/angular-material-calendar.js"></script>
 	<script src="/public/js/services/easy.model.js"></script>
+	<script src="/public/js/utils/util.js"></script>
 	<script src="/public/js/controllers/app.js"></script>
 </body>
 </html>
