@@ -22,6 +22,13 @@ app.filter('title', function() {
 		return input ? input : '任务标题';
 	}
 });
+
+/**
+ * 自动获取焦点
+ * @param  {[type]} $timeout) {	return       {		scope: {trigger:                   '               [description]
+ * @param  {[type]} link:     function(scope, element)   {			scope.$watch('trigger', function(value) {				if(value [description]
+ * @return {[type]}           [description]
+ */
 app.directive('focusMe', function($timeout) {
 	return {
 		scope: {trigger: '=focusMe'},
